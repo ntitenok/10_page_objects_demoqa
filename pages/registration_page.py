@@ -1,8 +1,20 @@
-import time
+from enum import StrEnum
 
 from selene import browser, have, be
 from selene import by
 import os
+
+
+class Gender(StrEnum):
+    male = '[for="gender-radio-1"]'
+    female = '[for="gender-radio-2"]'
+    other = '[for="gender-radio-3"]'
+
+
+class Hobbies(StrEnum):
+    sports = '[for="hobbies-checkbox-1"]'
+    reading = '[for="hobbies-checkbox-2"]'
+    music = '[for="hobbies-checkbox-3"]'
 
 
 class StudentRegistrationPage:
@@ -54,6 +66,7 @@ class StudentRegistrationPage:
 
     def submit_registration_form(self):
         browser.element('#submit').click()
+
     def assert_registration_form(self, full_name, email, gender, mobile_number, birth_date, subjects, hobbies,
                                  file_name, current_address, state_and_city):
         browser.element('.table').all('td:nth-child(2)').should(
