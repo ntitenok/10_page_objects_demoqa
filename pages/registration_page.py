@@ -31,7 +31,7 @@ class StudentRegistrationPage:
     def fill_email(self, value):
         browser.element('#userEmail').should(be.blank).type(value)
 
-    def select_gender(self, value):
+    def selected_gender(self, value):
         browser.element(value).click()
 
     def fill_mobile_number(self, value):
