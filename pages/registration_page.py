@@ -1,19 +1,9 @@
-from enum import StrEnum
-
-from selene import browser, have, be
-from selene import by
+from selene import browser, be, have, by
 import os
 from data.users import User
 
 
-
-
-
 class StudentRegistrationPage:
-
-    def __init__(self):
-        self.first_name = browser.element('#firstName').should(be.blank)
-
 
     def register_student(self, user: User):
 
@@ -25,40 +15,25 @@ class StudentRegistrationPage:
         self.__fill_date_of_birth(user.birth_date)
         self.__select_subjects(user.subjects)
         self.__select_hobbies(user.hobbies)
-        self.__select_hobbies()
+        self.__load_file(f'resources\\{user.file_name}')
+        self.__select_current_address(user.current_address)
+        self.__select_state_and_city(user.state, user.city)
+        self.__submit_registration_form()
 
-
-
-        def select_hobbies(self, *values):
-            for value in values:
-                browser.element(value).click()
-
-        def load_file(self, path):
-            browser.element('#uploadPicture').send_keys(os.path.abspath(path))
-
-        def select_current_address(self, value):
-            browser.element('#currentAddress').should(be.blank).type(value)
-
-        def select_state_and_city(self, value_state, value_city):
-
-            browser.element('#state').click().element(by.text(value_state)).click()
-            browser.element('#city').click().element(by.text(value_city)).click()
-
-        def submit_registration_form(self):
-            browser.element('#submit').click()
-
-        def assert_registration_form(self, full_name, email, gender, mobile_number, birth_date, subjects, hobbies,
-                                     file_name, current_address, state_and_city):
-            browser.element('.table').all('td:nth-child(2)').should(
-                have.texts(full_name, email, gender, mobile_number, birth_date, subjects, hobbies, file_name,
-                           current_address, state_and_city))
-
+    def assert_registration_form(self, user: User):
+        browser.element('.table').all('td').even.should(
+            have.texts(
+                f'{user.first_name} {user.last_name}', user.email, user.gender.name,
+                user.mobile_number,
+                user.birth_date.strftime('%d %B,%Y'), user.subjects, user.hobbies.name,
+                user.file_name,
+                user.current_address, f'{user.state} {user.city}'))
 
     def open_registration_form(self):
         browser.open('/automation-practice-form')
 
     def __fill_first_name(self, value):
-        self.first_name.type(value)
+        browser.element('#firstName').should(be.blank).type(value)
 
     def __fill_last_name(self, value):
         browser.element('#lastName').should(be.blank).type(value)
@@ -75,9 +50,9 @@ class StudentRegistrationPage:
     def __fill_date_of_birth(self, birth_date):
         browser.element('#dateOfBirthInput').click()
         browser.element('.react-datepicker__month-select').click()
-        browser.element('.react-datepicker__month-select').click().element(by.text(birth_date.month)).click()
+        browser.element('.react-datepicker__month-select').click().element(by.text(birth_date.strftime('%B'))).click()
         browser.element('.react-datepicker__year-select').click()
-        browser.element('.react-datepicker__year-select').click().element(by.text(birth_date.year)).click()
+        browser.element('.react-datepicker__year-select').click().element(by.text(birth_date.strftime('%Y'))).click()
         browser.element(f'.react-datepicker__day--0{birth_date.day}').click()
 
     def __select_subjects(self, *values):
@@ -88,22 +63,16 @@ class StudentRegistrationPage:
         for value in values:
             browser.element(value).click()
 
-    def load_file(self, path):
+    def __load_file(self, path):
         browser.element('#uploadPicture').send_keys(os.path.abspath(path))
 
-    def select_current_address(self, value):
+    def __select_current_address(self, value):
         browser.element('#currentAddress').should(be.blank).type(value)
 
-    def select_state_and_city(self, value_state, value_city):
+    def __select_state_and_city(self, value_state, value_city):
 
         browser.element('#state').click().element(by.text(value_state)).click()
         browser.element('#city').click().element(by.text(value_city)).click()
 
-    def submit_registration_form(self):
+    def __submit_registration_form(self):
         browser.element('#submit').click()
-
-    def assert_registration_form(self, full_name, email, gender, mobile_number, birth_date, subjects, hobbies,
-                                 file_name, current_address, state_and_city):
-        browser.element('.table').all('td:nth-child(2)').should(
-            have.texts(full_name, email, gender, mobile_number, birth_date, subjects, hobbies, file_name,
-                       current_address, state_and_city))

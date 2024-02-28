@@ -2,17 +2,19 @@ import dataclasses
 from enum import StrEnum
 from datetime import date
 
-class Gender(StrEnum):
-    MALE = '[for="gender-radio-1"]'
-    FEMALE = '[for="gender-radio-2"]'
-    OTHER = '[for="gender-radio-3"]'
 
+class Gender(StrEnum):
+    Male = '[for="gender-radio-1"]'
+    Female = '[for="gender-radio-2"]'
+    Other = '[for="gender-radio-3"]'
 
 
 class Hobbies(StrEnum):
-    sports = '[for="hobbies-checkbox-1"]'
-    reading = '[for="hobbies-checkbox-2"]'
-    music = '[for="hobbies-checkbox-3"]'
+    Sports = '[for="hobbies-checkbox-1"]'
+    Reading = '[for="hobbies-checkbox-2"]'
+    Music = '[for="hobbies-checkbox-3"]'
+
+
 @dataclasses.dataclass
 class User:
     first_name: str
@@ -23,9 +25,7 @@ class User:
     birth_date: date
     subjects: str
     hobbies: Hobbies
-
-
-
-
-
-
+    file_name: str
+    current_address: str
+    state: str
+    city: str
