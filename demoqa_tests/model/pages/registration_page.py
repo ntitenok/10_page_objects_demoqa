@@ -1,6 +1,6 @@
 from selene import browser, be, have, by
 import os
-from data.users import User
+from demoqa_tests.data import User
 
 
 class StudentRegistrationPage:
@@ -20,7 +20,7 @@ class StudentRegistrationPage:
         self.__select_state_and_city(user.state, user.city)
         self.__submit_registration_form()
 
-    def assert_registration_form(self, user: User):
+    def assert_form(self, user: User):
         browser.element('.table').all('td').even.should(
             have.texts(
                 f'{user.first_name} {user.last_name}', user.email, user.gender.Male.name,
@@ -29,7 +29,7 @@ class StudentRegistrationPage:
                 user.file_name,
                 user.current_address, f'{user.state} {user.city}'))
 
-    def open_registration_form(self):
+    def open_form(self):
         browser.open('/automation-practice-form')
 
     def __fill_first_name(self, value):
