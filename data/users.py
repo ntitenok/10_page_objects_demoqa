@@ -1,18 +1,18 @@
 import dataclasses
-from enum import StrEnum
+from enum import Enum
 from datetime import date
 
 
-class Gender(StrEnum):
-    Male = '[for="gender-radio-1"]'
-    Female = '[for="gender-radio-2"]'
-    Other = '[for="gender-radio-3"]'
+class Gender(Enum):
+    Male = 1
+    Female = 2
+    Other = 3
 
 
-class Hobbies(StrEnum):
-    Sports = '[for="hobbies-checkbox-1"]'
-    Reading = '[for="hobbies-checkbox-2"]'
-    Music = '[for="hobbies-checkbox-3"]'
+class Hobbies(Enum):
+    Sports = 1
+    Reading = 2
+    Music = 3
 
 
 @dataclasses.dataclass

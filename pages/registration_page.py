@@ -10,11 +10,11 @@ class StudentRegistrationPage:
         self.__fill_first_name(user.first_name)
         self.__fill_last_name(user.last_name)
         self.__fill_email(user.email)
-        self.__select_gender(user.gender)
+        self.__select_gender(f'[for="gender-radio-{user.gender.value}"]')
         self.__fill_mobile_number(user.mobile_number)
         self.__fill_date_of_birth(user.birth_date)
         self.__select_subjects(user.subjects)
-        self.__select_hobbies(user.hobbies)
+        self.__select_hobbies(f'[for="hobbies-checkbox-{user.hobbies.value}"]')
         self.__load_file(f'resources\\{user.file_name}')
         self.__select_current_address(user.current_address)
         self.__select_state_and_city(user.state, user.city)
@@ -23,9 +23,9 @@ class StudentRegistrationPage:
     def assert_registration_form(self, user: User):
         browser.element('.table').all('td').even.should(
             have.texts(
-                f'{user.first_name} {user.last_name}', user.email, user.gender.name,
+                f'{user.first_name} {user.last_name}', user.email, user.gender.Male.name,
                 user.mobile_number,
-                user.birth_date.strftime('%d %B,%Y'), user.subjects, user.hobbies.name,
+                user.birth_date.strftime('%d %B,%Y'), user.subjects, user.hobbies.Music.name,
                 user.file_name,
                 user.current_address, f'{user.state} {user.city}'))
 
