@@ -1,11 +1,11 @@
 from selene import browser, be, have, by
 import os
-from demoqa_tests.data import User
+from demoqa_tests.data.users import User
 
 
 class StudentRegistrationPage:
 
-    def register_student(self, user: User):
+    def fill_student_form(self, user: User):
 
         self.__fill_first_name(user.first_name)
         self.__fill_last_name(user.last_name)
@@ -20,7 +20,7 @@ class StudentRegistrationPage:
         self.__select_state_and_city(user.state, user.city)
         self.__submit_registration_form()
 
-    def assert_form(self, user: User):
+    def assert_student_form(self, user: User):
         browser.element('.table').all('td').even.should(
             have.texts(
                 f'{user.first_name} {user.last_name}', user.email, user.gender.Male.name,

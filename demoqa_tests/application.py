@@ -1,14 +1,13 @@
-from selene.support.shared import browser
-
-from demoqa_tests.model.components import Panel
-from demoqa_tests.model.pages.profile_page import ProfilePage
+from demoqa_tests.model.components.left_panel import Panel
+from demoqa_tests.model.pages.text_box_page import TextBoxPage
 from demoqa_tests.model.pages.registration_page import StudentRegistrationPage
 
 
 class Application:
     def __init__(self):
-        self.simple_registration = StudentRegistrationPage()
-        self.profile = ProfilePage()
-        self.panel = Panel()
+        self.student_registration = StudentRegistrationPage()
+        self.text_box = TextBoxPage()
+        self.left_panel = Panel()
+
 
 app = Application()
