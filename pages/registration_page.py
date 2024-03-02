@@ -1,20 +1,17 @@
-from enum import StrEnum
-
-from selene import browser, have, be
-from selene import by
+from enum import Enum
+from selene import browser, by, have, be
 import os
 
 
-class Gender(StrEnum):
-    male = '[for="gender-radio-1"]'
-    female = '[for="gender-radio-2"]'
-    other = '[for="gender-radio-3"]'
+class Gender(Enum):
+    male = 1
+    female = 2
+    other = 3
 
-
-class Hobbies(StrEnum):
-    sports = '[for="hobbies-checkbox-1"]'
-    reading = '[for="hobbies-checkbox-2"]'
-    music = '[for="hobbies-checkbox-3"]'
+class Hobbies(Enum):
+    sports = 1
+    reading = 2
+    music = 3
 
 
 class StudentRegistrationPage:
@@ -32,7 +29,7 @@ class StudentRegistrationPage:
         browser.element('#userEmail').should(be.blank).type(value)
 
     def select_gender(self, value):
-        browser.element(value).click()
+        browser.element(f'[for="gender-radio-{value}"]').click()
 
     def fill_mobile_number(self, value):
         browser.element('#userNumber').should(be.blank).type(value)
@@ -51,7 +48,7 @@ class StudentRegistrationPage:
 
     def select_hobbies(self, *values):
         for value in values:
-            browser.element(value).click()
+            browser.element(f'[for="hobbies-checkbox-{value}"]').click()
 
     def load_file(self, path):
         browser.element('#uploadPicture').send_keys(os.path.abspath(path))

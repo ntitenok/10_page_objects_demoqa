@@ -1,6 +1,4 @@
-from pages.registration_page import StudentRegistrationPage
-from pages.registration_page import Gender
-from pages.registration_page import Hobbies
+from pages.registration_page import StudentRegistrationPage, Gender, Hobbies
 
 
 def test_student_registration_form():
