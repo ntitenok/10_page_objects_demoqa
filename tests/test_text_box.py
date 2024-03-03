@@ -1,4 +1,3 @@
-import datetime
 from demoqa_tests.application import app
 from tests.test_registration_page import users
 
