@@ -1,6 +1,6 @@
 import dataclasses
 from enum import Enum
-from datetime import date
+import datetime
 
 
 class Gender(Enum):
@@ -22,10 +22,17 @@ class User:
     email: str
     gender: Gender
     mobile_number: str
-    birth_date: date
+    birth_date: datetime.date
     subjects: str
     hobbies: Hobbies
     file_name: str
     current_address: str
     state: str
     city: str
+    file: str
+
+
+nikolai = User(first_name='Nikolai', last_name='Titenok', email='ntitenok@gmail.com', gender=Gender.Male,
+               mobile_number='1234567890', birth_date=datetime.date(1989, 5, 22), subjects='Computer Science',
+               hobbies=Hobbies.Music, file_name='myfile.txt', current_address='Bombey street',
+               state='Uttar Pradesh', city='Agra', file='myfile.txt')

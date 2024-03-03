@@ -1,3 +1,5 @@
+import time
+
 from selene import browser, have, be
 from demoqa_tests.data.users import User
 
@@ -11,8 +13,11 @@ class TextBoxPage:
 
     def assert_user_form(self, user: User):
 
-        browser.element('#name').should(have.exact_text(f'Name:{user.first_name} {user.last_name}'))
-        browser.element('')
+        browser.element('#output #name').should(have.exact_text(f'Name:{user.first_name} {user.last_name}'))
+        browser.element('#output #email').should(have.exact_text(f'Email:{user.email}'))
+        browser.element('#output #currentAddress').should(have.exact_text(f"Current Address :{user.current_address}"))
+        browser.element('#output #permanentAddress').should(have.exact_text(f'Permananet Address :{user.state} {user.city}'))
+
 
         # browser.element('#output').all('p').even.should(
         #     have.texts(
