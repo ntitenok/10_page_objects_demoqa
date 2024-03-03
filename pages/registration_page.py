@@ -1,5 +1,5 @@
 from selene import browser, be, have, by
-import os
+from pages.resource import path
 from data.users import User
 
 
@@ -15,7 +15,7 @@ class StudentRegistrationPage:
         self.__fill_date_of_birth(user.birth_date)
         self.__select_subjects(user.subjects)
         self.__select_hobbies(f'[for="hobbies-checkbox-{user.hobbies.value}"]')
-        self.__load_file(f'resources\\{user.file_name}')
+        self.__load_file(user.path)
         self.__select_current_address(user.current_address)
         self.__select_state_and_city(user.state, user.city)
         self.__submit_registration_form()
@@ -63,8 +63,8 @@ class StudentRegistrationPage:
         for value in values:
             browser.element(value).click()
 
-    def __load_file(self, path):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(path))
+    def __load_file(self, value):
+        browser.element('#uploadPicture').set_value(path(value))
 
     def __select_current_address(self, value):
         browser.element('#currentAddress').should(be.blank).type(value)

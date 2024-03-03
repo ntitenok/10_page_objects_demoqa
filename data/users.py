@@ -29,3 +29,4 @@ class User:
     current_address: str
     state: str
     city: str
+    path: str
