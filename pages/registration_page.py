@@ -1,6 +1,6 @@
 from enum import Enum
 from selene import browser, by, have, be
-import os
+from pages.resource import path
 
 
 class Gender(Enum):
@@ -50,9 +50,8 @@ class StudentRegistrationPage:
         for value in values:
             browser.element(f'[for="hobbies-checkbox-{value}"]').click()
 
-    def load_file(self, path):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(path))
-
+    def load_file(self, value):
+        browser.element('#uploadPicture').set_value(path(value))
     def select_current_address(self, value):
         browser.element('#currentAddress').should(be.blank).type(value)
 

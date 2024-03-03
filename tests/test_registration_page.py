@@ -13,7 +13,7 @@ def test_student_registration_form():
     registration_page.fill_date_of_birth('May', '1989', '22')
     registration_page.select_subjects('Computer Science', 'Maths', 'Chemistry')
     registration_page.select_hobbies(Hobbies.sports.value, Hobbies.reading.value, Hobbies.music.value)
-    registration_page.load_file('resources\\myfile.txt')
+    registration_page.load_file('myfile.txt')
     registration_page.select_current_address("Bombey's street")
     registration_page.select_state_and_city('Haryana', 'Panipat')
     registration_page.submit_registration_form()
