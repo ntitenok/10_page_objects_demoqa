@@ -6,7 +6,7 @@ class User:
     password: str
 
 nikolai = User(login='ntitenok', password='Faishu2iD6kac1Baethood')
-
+print('1')
 
 
 
