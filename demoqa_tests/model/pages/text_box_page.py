@@ -1,5 +1,3 @@
-import time
-
 from selene import browser, have, be
 from demoqa_tests.data.users import User
 
